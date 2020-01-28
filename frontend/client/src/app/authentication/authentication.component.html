@@ -1,0 +1,9 @@
+<jqxForm #myForm
+         [width]='400'
+         [height]="'auto'"
+         [template]='template'
+         (onFormDataChange)="handlerDataForm($event)"
+         (onButtonClick)="submit()">
+</jqxForm>
+
+<p>{{token$ | async}}</p>

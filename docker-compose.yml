@@ -1,0 +1,79 @@
+version: "3.1"
+services:
+
+  client:
+    build:
+      context: ./frontend/client
+      dockerfile: Dockerfile
+    restart: on-failure
+    ports:
+      - 4200:4200
+    volumes:
+      - ./frontend/client:/app
+    networks:
+      - internal_net
+
+  react:
+    image: node:12.2.0-alpine
+    volumes:
+      - ./frontend/seller:/app
+    working_dir: /app
+    command: sh -c "npm i && npm start"
+    environment:
+      - NODE_ENV=development
+    ports:
+      - "4100:4100"
+    networks:
+      - internal_net
+
+  django:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - ./backend/app:/drf
+    working_dir: /drf
+    command: sh -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    networks:
+      - internal_net
+
+  postgre:
+    image: postgres:10.0-alpine
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgre
+    networks:
+      - internal_net
+
+#  redis:
+#    image: redis:alpine
+#    restart: on-failure
+#    ports:
+#      - "6379:6379"
+#    volumes:
+#      - "redis:/redis_data"
+#    networks:
+#      - internal_net
+#
+#  adminer:
+#    image: adminer
+#    restart: always
+#    ports:
+#      - 8080:8080
+
+
+networks:
+  internal_net:
+
+volumes:
+  postgre:
+  redis:
