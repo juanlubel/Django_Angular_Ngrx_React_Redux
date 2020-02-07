@@ -1,18 +1,16 @@
 import {Injectable} from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
-import {select, Store} from '@ngrx/store';
+import {Store} from '@ngrx/store';
 import {of} from 'rxjs';
-import {map, switchMap, withLatestFrom} from 'rxjs/operators';
+import {map, switchMap} from 'rxjs/operators';
 
 import {IUserState} from "../state/login.state";
 
-import {GetTokenSuccess, GetToken, ELoginActions} from '../actions/login.actions'
+import {ELoginActions, GetToken, GetTokenSuccess} from '../actions/login.actions'
 
-import { UserLogin, UserToken } from "../../models/user.model";
+import {UserToken} from "../../models/user.model";
 
 import {ApiService} from "../../core/services";
-
-
 
 
 @Injectable()
@@ -26,8 +24,6 @@ export class LoginEffects {
       return this.apiService.post('auth','/login',payload)}),
     switchMap( (token: UserToken) => of(new GetTokenSuccess(token)))
   )
-
-
 
   constructor(
     private actions : Actions,

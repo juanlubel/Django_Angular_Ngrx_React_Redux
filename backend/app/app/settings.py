@@ -39,13 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'corsheaders',
 
+    'corsheaders',
     'rest_framework',
 
     'app.market',
     'app.structures',
     'app.authentication',
+    'app.profiles',
 ]
 
 MIDDLEWARE = [
@@ -145,7 +146,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# AUTH_USER_MODEL = 'authentication.User'
+# AUTH_USER_MODEL = 'profile.User'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (

@@ -16,7 +16,6 @@ export class ApiService implements OnInit {
   }
 
   private static formatErrors(error: any) {
-    console.log(error);
     return throwError(error.error);
   }
 
@@ -24,10 +23,16 @@ export class ApiService implements OnInit {
   ngOnInit() {
 
   }
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization' : `Bearer ${localStorage.getItem('jwt')}`
+    })
+  }
 
-  get(path: string, type: string = '', id: string = '') {
-    console.log(environment[path]);
-    return this.http.get(`${environment[path]}${type}${id}`)
+  get(path: string, type: string = '/', id: string = '') {
+    console.log(`${environment[path]}${type}${id}`);
+    return this.http.get(`${environment[path]}${type}${id}`, this.httpOptions)
       .pipe(catchError(ApiService.formatErrors));
   }
 

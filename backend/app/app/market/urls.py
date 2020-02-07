@@ -8,6 +8,9 @@ urlpatterns = [
     url(r'^item/$', ItemCreateView.as_view(), name='item-create'),
     url(r'^$', ItemListView.as_view(), name='item-list'),
 
+    # url(r'^favorite/$', ItemFavoriteAPIView.as_view(), name='item-favorite'),
+
+
     url(r'^seeder/$', Seeder, name='seeder'),
 
     url(r'^quick/$', QuickSortAPI.as_view(), name='item-list'),

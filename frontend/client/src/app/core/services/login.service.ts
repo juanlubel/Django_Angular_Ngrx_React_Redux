@@ -22,4 +22,8 @@ export class LoginService {
     return this.apiService.post( 'auth','/login', params);
   }
 
+  verify(): Observable <any> {
+    return this.apiService.post( 'auth','/user', {token :localStorage.getItem('jwt')});
+  }
+
 }

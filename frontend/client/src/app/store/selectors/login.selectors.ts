@@ -1,6 +1,6 @@
 import { createSelector } from '@ngrx/store';
-import {IAppState} from "../reducers/app.reducers";
 import {IUserState} from "../state/login.state";
+import {IAppState} from "../state/app.state";
 
 
 
@@ -8,5 +8,7 @@ const selectUsers = (state: IAppState) => state.token;
 
 export const selectToken = createSelector(
   selectUsers,
-  (state: IUserState) => state.token
+  (state: IUserState) => {
+    return state.token ? state.token : localStorage.getItem('jwt')
+  }
 );

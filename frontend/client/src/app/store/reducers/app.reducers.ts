@@ -1,12 +1,10 @@
 import {ActionReducerMap} from '@ngrx/store';
 
 import {loginReducers} from "./login.reducers";
-import {UserToken} from "../../models/user.model";
-
-export interface IAppState {
-  token: any
-}
+import {IAppState} from "../state/app.state";
+import {marketReducers} from "./market.reducers";
 
 export const appReducers: ActionReducerMap<IAppState, any> = {
-  token: loginReducers
+  token: loginReducers,
+  market: marketReducers
 };

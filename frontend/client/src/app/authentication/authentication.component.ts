@@ -8,6 +8,7 @@ import {Observable} from "rxjs";
 import {jqxFormComponent} from "jqwidgets-ng/jqxform";
 import {selectToken} from "../store/selectors/login.selectors";
 import {Router} from "@angular/router";
+import {IAppState} from "../store/state/app.state";
 
 @Component({
   selector: 'app-authentication',
@@ -56,19 +57,20 @@ export class AuthenticationComponent implements OnInit {
 
   constructor(
     private loginService: LoginService,
-    private store: Store<IUserState>,
+    private store: Store<IAppState>,
     private router: Router
   ) {
 
   }
 
   submit() {
+    console.log(this.user);
     this.store.dispatch(new GetToken(this.user))
     this.token$ = this.store.select(selectToken)
     this.token$.subscribe(res => {
       console.log(res);
       localStorage.setItem('jwt', res)
-      this.router.navigate(['/'])
+      this.router.navigate(['/home'])
     })
   }
 

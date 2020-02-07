@@ -1,9 +1,11 @@
 from random import randint
+from django.http import JsonResponse
 
 from rest_framework import generics
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, AllowAny
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, AllowAny, IsAuthenticated
+from rest_framework.views import APIView
 
 from .minerals import dict
 from .models import Item
@@ -13,6 +15,7 @@ from .strutures.merge_sort import MergeSort
 
 
 from django.contrib.auth import get_user_model
+from ..profiles.serializers import CurrentUserSerializer
 
 import sys
 sys.setrecursionlimit(1500)
@@ -24,7 +27,7 @@ User = get_user_model()
 class ItemListView(generics.ListAPIView):
     lookup_field = 'slug'
     serializer_class = ItemSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         return Item.objects.all()
@@ -70,6 +73,18 @@ class MergeSortAPI(generics.ListAPIView):
         item_sorted = MergeSort(items.data)
         item_sorted.sort()
         return Response(item_sorted.data)
+
+
+# class ItemFavoriteAPIView(APIView):
+#     permission_classes = (IsAuthenticated,)
+#     renderer_classes = [JSONRenderer]
+#     serializer_class = CurrentUserSerializer
+#
+#     def post(self, request, item_slug=None):
+#         user = self.request.user
+#         print('user in favorite post')
+#         print(user.profile.bio)
+#         return Response(user)
 
 
 def Seeder(self):

@@ -18,8 +18,6 @@ export class GetTokenSuccess implements Action {
   }
 }
 
-
-
 export type LoginActions =
   GetToken |
   GetTokenSuccess;

@@ -13,6 +13,7 @@ import {StoreModule} from "@ngrx/store";
 import {appReducers} from "./store/reducers/app.reducers";
 import {EffectsModule} from "@ngrx/effects";
 import {LoginEffects} from "./store/effects/login.effects";
+import {MarketEffects} from "./store/effects/market.effects";
 
 
 @NgModule({
@@ -28,7 +29,7 @@ import {LoginEffects} from "./store/effects/login.effects";
 
     /*Redux*/
     StoreModule.forRoot(appReducers),
-    EffectsModule.forRoot([LoginEffects]),
+    EffectsModule.forRoot([LoginEffects, MarketEffects]),
 
     /*nav bar*/
     jqxNavBarModule,

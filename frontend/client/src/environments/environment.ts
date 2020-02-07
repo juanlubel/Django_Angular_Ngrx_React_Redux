@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  auth: 'http://localhost:8000/api/api-auth'
+  auth: 'http://localhost:8000/api/api-auth',
+  market: 'http://localhost:8000/api/market',
 };
 
 /*

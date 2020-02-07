@@ -4,11 +4,11 @@ import {Routes, RouterModule, PreloadAllModules} from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'home',
     loadChildren: './home/home.module#HomeModule'
   },
   {
-    path: 'auth',
+    path: '',
     loadChildren: './authentication/authentication.module#AuthenticationModule'
   },
 ];
