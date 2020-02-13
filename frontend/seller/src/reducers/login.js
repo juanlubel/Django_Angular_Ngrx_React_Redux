@@ -4,13 +4,7 @@ import {
 
 
 export default (state = {token: ''}, action) => {
-    console.log('REDUCER', action)
     switch (action.type) {
-        case 'test':
-            return {
-                ...state,
-                test: action.payload
-            };
         case LOGIN:
         case 'REGISTER':
             return {

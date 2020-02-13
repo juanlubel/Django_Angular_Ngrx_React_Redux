@@ -7,7 +7,6 @@ export const marketReducers = (
 ): MarketState => {
   switch (actions.type) {
     case EMarketActions.GetAllMarketSuccess: {
-      console.log(state)
       return {
         ...state,
         minerals: actions.payload

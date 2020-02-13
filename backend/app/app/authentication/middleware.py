@@ -71,7 +71,6 @@ class JWTAuthentication(authentication.BaseAuthentication):
         return self._authenticate_credentials(request, token)
 
     def _authenticate_credentials(self, request, token):
-        print('decode', token)
         """
         Try to authenticate the given credentials. If authentication is
         successful, return the user and token. If not, throw an error.
@@ -79,7 +78,6 @@ class JWTAuthentication(authentication.BaseAuthentication):
         try:
             # payload = api_settings.JWT_VERIFY(token)
             payload = jwt.decode(token, settings.SECRET_KEY)
-            print('payload', payload)
         except:
             msg = 'Invalid authentication. Could not decode token.'
             raise exceptions.AuthenticationFailed(msg)
@@ -93,5 +91,4 @@ class JWTAuthentication(authentication.BaseAuthentication):
         if not user.is_active:
             msg = 'This user has been deactivated.'
             raise exceptions.AuthenticationFailed(msg)
-        print(user, token)
         return user, token

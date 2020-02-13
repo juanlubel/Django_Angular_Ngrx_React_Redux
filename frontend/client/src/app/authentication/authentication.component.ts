@@ -64,11 +64,9 @@ export class AuthenticationComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.user);
     this.store.dispatch(new GetToken(this.user))
     this.token$ = this.store.select(selectToken)
     this.token$.subscribe(res => {
-      console.log(res);
       localStorage.setItem('jwt', res)
       this.router.navigate(['/home'])
     })

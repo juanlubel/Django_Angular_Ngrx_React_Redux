@@ -75,16 +75,16 @@ class MergeSortAPI(generics.ListAPIView):
         return Response(item_sorted.data)
 
 
-# class ItemFavoriteAPIView(APIView):
-#     permission_classes = (IsAuthenticated,)
-#     renderer_classes = [JSONRenderer]
-#     serializer_class = CurrentUserSerializer
-#
-#     def post(self, request, item_slug=None):
-#         user = self.request.user
-#         print('user in favorite post')
-#         print(user.profile.bio)
-#         return Response(user)
+class ItemFavoriteAPIView(APIView):
+    permission_classes = (IsAuthenticated,)
+    renderer_classes = [JSONRenderer]
+    serializer_class = CurrentUserSerializer
+
+    def post(self, request, item_slug=None):
+        user = self.request.user
+        print('user in favorite post')
+        print(user.profile.bio)
+        return Response(user)
 
 
 def Seeder(self):

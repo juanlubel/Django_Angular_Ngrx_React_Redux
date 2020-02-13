@@ -1,5 +1,4 @@
 const promiseMiddleware = store => next => action => {
-  console.log('MIDDLEWARE', next)
   if (isPromise(action.payload)) {
     // store.dispatch({ type: 'ASYNC_START', subtype: action.type });
     action.payload.then(

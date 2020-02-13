@@ -11,6 +11,7 @@ class Item(models.Model):
     sell_price = models.IntegerField(default=0)
     buy_price = models.IntegerField(default=0)
 
+
     def __str__(self):
         return str(self.owner.username)
 
